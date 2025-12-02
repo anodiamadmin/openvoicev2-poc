@@ -1,0 +1,73 @@
+Following is for your attention and I do not want any output/ response from this query. I shall fire subsequent queries depending on this, for which I shall require your response.
+
+The following are ready in vast.ai
+
+Storage: 1
+You have 1 volume available
+Local-27915352: Unverified; Size: 100 GB; Instances: 1
+Cost: $0.20/mo; Expires: January 1, 2026 9:55 AM
+Volume Information
+Name: Local-27915352; ID: 27915352; Machine ID: 45075; Type: Local Volume; Size: 100 GB; Cost: $0.20/mo; Location: Austria, AT
+Rented: November 16, 2025 7:55 PM; Expires: January 1, 2026 9:55 AM
+Instances using this volume: 1; Instance ID: 27915353
+
+Instances: 1
+1x RTX 3090: Unverified: 185.230.133.7: 18m: 1 mon 15d: <$0.001/hr
+Instance ID: 27915353; Host: 297758; Machine ID: 45075; Vol: Local-27915352
+Max CUDA: 13.0: 35.3 TFLOPS: VRAM 0/24.0GB: 805.2 GB/s
+DLPerf: 805.2 DLP/$/hr
+Network: 100 ports: 8.2 Mbps up: 32.9 Mbps down
+CPU: AMD EPYC 3151 4-Core Processor: 4.0/4 CPU: 0 / 32.0 GB
+Disk: BIWIN M350 1000GB: 2723.4 MB/s: 0.0 / 100.0 GB
+Motherboard: MJ11-EC1-OT: PCIE 3.0/8x: 6.3 GB/s
+Open: Access your Web UI at the port specified in your environment OPEN_BUTTON_PORT variable.
+GPU: 0% 19°C, CPU: 0.14%, Status: success, running vastai/pytorch_cuda-12.9.1-auto/jupyter
+
+Also, I can connect to the Vast.ai VM instance from my local windows VS Code terminal as root. Next, change to linux user (anirban/ sayan) by the following command.
+sudo -i -u <linux-username>
+
+From there, I can git login and SSH to my Github repo https://github.com/anodiamadmin/rvc-gpu-poc as Github user 1120anirban@gmail.com or sayan@anodiam.com respectively. By the following commands.
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/<linux-username>-git-key
+ssh -T git@github.com
+
+-------------------------------------------------------------------------------
+
+By the following commands, I have already created user directories (e.g. /home/anirban and /home/sayan):
+$> adduser <linux-username>
+$> usermod -aG sudo <linux-username>
+$> sudo -i -u <linux-username>
+But I suspect, these user directories are bu default, created on my boot disk and not on the persistent disk.
+I have also, already connected to Github through SSH and successfully git cloned Github repo https://github.com/anodiamadmin/rvc-gpu-poc into those as Github user 1120anirban@gmail.com or sayan@anodiam.com respectively by these commands:
+$> eval "$(ssh-agent -s)"
+$> ssh-add ~/.ssh/<linux-username>-git-key
+$> ssh -T git@github.com
+$> git clone https://github.com/anodiamadmin/rvc-gpu-poc
+
+I want to make sure that the /home/<linux-username> directories (e.g. /home/anirban and /home/sayan) are all created on the mounted persistent disk. How do I achieve that? Give me detailed step by step instructions.
+
+Also, first let me know if I need to revert any steps in my set-up. Next, the steps to proceed. If you have any doubts or questions feel free to ask and clarify.
+
+-------------------------------------------------------------------------------
+We have a vast.ai Debian Linux machine on which Sayan and I are doing development. We are using VS Code from our Windows machine to SSH into the remote vast.ai Debian Linux host machine. Our dev codes are in /data/home/<linux-username> folders where the sudo users' <linux-username>s are sayan and anirban while the Github users are sayan@anodiam.com and 1120anirban@gmail.com respectively. anirban@anodiam.com owns the git repo https://github.com/anodiamadmin/rvc-gpu-poc.git
+
+Our developed app will deal with FASTapi, React, RVC and other AI models and Python development, Terraform, Docker, Kubernetes, GCP Cloud, MS Office and PDF documents and artefacts, MySQL etc.
+
+We have connected and ssh-ed into Github and cloned the repo rvc-gpu-poc through the command [git clone https://github.com/anodiamadmin/rvc-gpu-poc.git] into /data/home/<linux-username>/rvc-gpu-poc folder.
+
+Is there any way so that we could use some GUI like Github desktop to do the rest of Github version control and management in our scenario? If so please give me the step by step detailed instructions of how to do our Github version control and management of the code and artefacts we develop?
+
+Else if we need to do the same only via CLI at VS Code Terminal and Linux prompt as sudo users anirban or sayan give me a list of all possible git commands we may need with their explanations so that we could copy and paste those commands and use the same for our Github version control and management of the full stack code and artefacts.
+
+-------------------------------------------------------------------------------
+Github user anodiamadmin owns public repository https://github.com/anodiamadmin/rvc-gpu-poc
+Github users 1120anirban and sayan are added to this repo as collaborators. These 2 users (and similar future collaborators) will do all the development in this repository from remote vast ai cloud VM and through VS Code. They will use the following .ssh keys to access the repository. (similar for sayan)
+/data/home/1120anirban/.ssh
+-rw------- 1 anirban anirban 411 Nov 24 11:48 anirban-git-key
+-rw-r--r-- 1 anirban anirban  97 Nov 24 11:48 anirban-git-key.pub
+-rw-rw-r-- 1 anirban anirban  87 Nov 25 10:11 config
+-rw------- 1 anirban anirban 978 Nov 24 11:56 known_hosts
+anirban-git-key.pub and sayanan-git-key.pub are already added into https://github.com/settings/keys of anirban and sayan respectively.
+Repository has been cloned into /data/home/1120anirban/rvc-gpu-poc folder
+Give me step by step instructions no how to set up git, pull, push, staging etc. of dev artefacts from CLI of VS Code.
+-------------------------------------------------------------------------------
