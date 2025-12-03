@@ -6,13 +6,21 @@ from melo.api import TTS
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
+# 0) Config Section
+# language = "EN"
+# base_speaker_key = "en-india"  # must match filenames like en.pth
+language = "EN_NEWEST"
+base_speaker_key = "en-us"  # must match filenames like en.pth
+
 # 1) Paths
 ckpt_converter = "checkpoints_v2/converter"
 output_dir = "outputs_v2"
 os.makedirs(output_dir, exist_ok=True)
 
-reference_speaker = "resources/example_reference.mp3"  # later this will be user's .wav
-text = "This is a test of OpenVoice V2 running on my Vast.ai GPU server."
+# reference_speaker = "resources/example_reference.mp3"  # later this will be user's .wav
+reference_speaker = "resources/small.mp3"
+# text = "This is a test of OpenVoice V2 running on my Vast.ai GPU server."
+text = "Serena Williams has addressed speculation about a tennis comeback after reports suggested the 23-time Grand Slam champion had applied for reinstatement to competition."
 
 # 2) Init converter
 tone_color_converter = ToneColorConverter(
@@ -29,7 +37,6 @@ tgt_se, audio_name = se_extractor.get_se(
 )
 
 # 4) Use MeloTTS as base speaker (choose English variant)
-language = "EN_NEWEST"  # can try EN, EN_US, EN_AU, etc.
 model = TTS(language=language, device=device)
 speaker_ids = model.hps.data.spk2id
 
@@ -50,7 +57,7 @@ model.tts_to_file(
 
 # 6) Load source speaker embedding from checkpoints_v2
 #    Map 'EN_NEWEST' to lower-case file key if needed
-speaker_key_file = "en-newest"  # must match filenames like en-newest.pth
+speaker_key_file = base_speaker_key
 src_se = torch.load(
     f"checkpoints_v2/base_speakers/ses/{speaker_key_file}.pth",
     map_location=device
