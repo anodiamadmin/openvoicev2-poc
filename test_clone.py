@@ -44,7 +44,7 @@ speed = 1.0
 model.tts_to_file(
     text=text,
     speaker_id=speaker_id,
-    file_path=tmp_path,
+    output_path=tmp_path,
     speed=speed
 )
 
