@@ -10,7 +10,7 @@ device = "cuda:0" if torch.cuda.is_available() else "cpu"
 # language = "EN"
 # base_speaker_key = "en-india"  # must match filenames like en.pth
 language = "EN_NEWEST"
-base_speaker_key = "en-us"  # must match filenames like en.pth
+base_speaker_key = "en-india"  # must match filenames like en.pth
 
 # 1) Paths
 ckpt_converter = "checkpoints_v2/converter"
@@ -18,7 +18,7 @@ output_dir = "outputs_v2"
 os.makedirs(output_dir, exist_ok=True)
 
 # reference_speaker = "resources/example_reference.mp3"  # later this will be user's .wav
-reference_speaker = "resources/small.mp3"
+reference_speaker = "resources/my_voice.wav"
 # text = "This is a test of OpenVoice V2 running on my Vast.ai GPU server."
 text = "Serena Williams has addressed speculation about a tennis comeback after reports suggested the 23-time Grand Slam champion had applied for reinstatement to competition."
 
@@ -33,7 +33,7 @@ tone_color_converter.load_ckpt(f"{ckpt_converter}/checkpoint.pth")
 tgt_se, audio_name = se_extractor.get_se(
     reference_speaker,
     tone_color_converter,
-    vad=True  # voice activity detection
+    vad=False  # voice activity detection
 )
 
 # 4) Use MeloTTS as base speaker (choose English variant)
@@ -45,7 +45,7 @@ first_speaker_key = list(speaker_ids.keys())[0]
 speaker_id = speaker_ids[first_speaker_key]
 
 tmp_path = f"{output_dir}/tmp_base.wav"
-speed = 1.0
+speed = 0.92
 
 # 5) Generate base TTS audio
 model.tts_to_file(
@@ -64,7 +64,7 @@ src_se = torch.load(
 )
 
 # 7) Run tone color converter to get cloned voice
-save_path = f"{output_dir}/test_clone_output.wav"
+save_path = f"{output_dir}/anirban_output.wav"
 encode_message = "@MyShell"
 
 tone_color_converter.convert(
